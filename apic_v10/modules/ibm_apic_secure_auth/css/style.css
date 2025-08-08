@@ -2,3 +2,13 @@
     width: 50%;
     margin: 0;
 }
+
+.apic-user-form-container-secure-action #edit-actions {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1px;
+}
+
+.apic-user-form-container-secure-action #edit-actions button {
+    padding: 0;
+}
