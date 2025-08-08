@@ -337,6 +337,14 @@ class ApicUserLoginForm extends UserLoginForm {
       '#attributes' => ['class' => ['apic-user-form-container', 'apic-user-form-container-secure']],
     ];
 
+    $baseForm['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => t('Sign in'),
+      '#attributes' => [
+         'class' => ['button', 'button--primary', 'btn-primary', 'btn'],
+       ],
+    ];
+    
     // Embed the default log in form
     // Wrap the whole form in a div that we can style.
     $baseForm['#prefix'] = '<div class="apic-user-form-inner-wrapper">';
@@ -360,6 +368,12 @@ class ApicUserLoginForm extends UserLoginForm {
       ];
     }
     else if ($this->inputForm == InputForm::CredentialsInputForm) {
+
+    // Embed the default log in form
+    // Wrap the whole form in a div that we can style.
+    $baseForm['#prefix'] = '<div class="apic-user-form-inner-wrapper apic-user-form-container-secure-action">';
+    $baseForm['#suffix'] = '</div>';
+
       //Hide render of name and email input forms
       $baseForm['name'] = [];
       $baseForm['email'] = [];
@@ -369,7 +383,7 @@ class ApicUserLoginForm extends UserLoginForm {
         '#value' => $this->t('Back'),
         '#submit' => ['::backToMailForm'],
         '#attributes' => [
-          'class' => ['btn', 'btn-primary'],
+          'class' => ['btn', 'btn-secondary'],
         ],
         '#validate' => [],
         '#limit_validation_errors' => [],
