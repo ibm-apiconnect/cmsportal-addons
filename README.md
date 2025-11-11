@@ -9,3 +9,6 @@ This module replaces the standard way an API is displayed in the portal with the
 
 ## IBM API Connect v10
 Modules and themes that are compatible with the IBM API Connect v10 Developer Portal.
+
+## IBM API Connect v12
+Modules and themes that are compatible with the IBM API Connect v12 Developer Portal.

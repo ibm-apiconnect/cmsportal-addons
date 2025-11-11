@@ -1,0 +1,467 @@
+<?php
+/********************************************************* {COPYRIGHT-TOP} ***
+ * Licensed Materials - Property of IBM
+ * 5725-L30, 5725-Z22
+ *
+ * (C) Copyright IBM Corporation 2016, 2022
+ *
+ * All Rights Reserved.
+ * US Government Users Restricted Rights - Use, duplication or disclosure
+ * restricted by GSA ADP Schedule Contract with IBM Corp.
+ ********************************************************** {COPYRIGHT-END} **/
+
+/**
+ * Implementation of hook_apic_app_create
+ *
+ * @param $node
+ * @param $data
+ */
+function appcreds_sync_apic_app_create($node, $data) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_create',
+    '%data' => $debug,
+  ]);
+
+  // could either send $data which is the result from the API Manager create application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/create', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_update
+ *
+ * @param $node
+ * @param $data
+ */
+function appcreds_sync_apic_app_update($node, $data) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_update',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager update application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/update', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_delete
+ * @deprecated please use hook_apic_app_pre_delete and hook_apic_app_post_delete hooks.
+ * @param $node
+ * @param $data
+ */
+function appcreds_sync_apic_app_delete($node, $data, $appId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_delete',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager delete application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/delete', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_pre_delete
+ *
+ * @param $node
+ * @param $data
+ */
+function appcreds_sync_apic_app_pre_delete($node, $data) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_pre_delete',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager delete application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/delete', 'POST', json_encode($data));
+}
+
+
+/**
+ * Implementation of hook_apic_app_post_delete
+ *
+ * @param $data
+ */
+function appcreds_sync_apic_app_post_delete($data) {
+  // make sure only log strings
+  if (is_string($data)) {
+    $debug = $data;
+  }
+  else {
+    $debug = serialize($data);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_post_delete',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager delete application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/delete', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_creds_create
+ *
+ * @param $node
+ * @param $data
+ * @param $credId
+ */
+function appcreds_sync_apic_app_creds_create($node, $data, $credId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_creds_create',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager create credentials portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/creds/create', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_creds_update
+ *
+ * @param $node
+ * @param $data
+ * @param $credId
+ */
+function appcreds_sync_apic_app_creds_update($node, $data, $credId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_creds_update',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager update credentials portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/creds/update', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_creds_delete
+ * @deprecated please use hook_apic_app_credential_pre_delete and hook_apic_app_credential_post_delete hooks.
+ * @param $node
+ * @param $data
+ * @param $credId
+ */
+function appcreds_sync_apic_app_creds_delete($node, $data, $credId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_creds_delete',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager delete credentials portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/creds/delete', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_credential_pre_delete
+ * 
+ * @param $credId
+ */
+function appcreds_sync_apic_app_credential_pre_delete($credId) {
+  // make sure only log strings
+  if (is_string($credId)) {
+    $debug = $credId;
+  }
+  else {
+    $debug = serialize($credId);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_credential_pre_delete',
+    '%data' => $debug,
+  ]);
+}
+
+/**
+ * Implementation of hook_apic_app_credential_post_delete
+ *
+ * @param $credId
+ */
+function appcreds_sync_apic_app_credential_post_delete($credId) {
+  // make sure only log strings
+  if (is_string($credId)) {
+    $debug = $credId;
+  }
+  else {
+    $debug = serialize($credId);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_credential_post_delete',
+    '%data' => $debug,
+  ]);
+}
+
+/**
+ * Implementation of hook_apic_app_modify_create_alter
+ *
+ * @param $data
+ * @param $appId
+ * @param $formState
+ */
+function hook_apic_app_modify_create_alter(&$data, $appId, $formState) {
+  // make sure only log strings
+  if (is_string($appId)) {
+    $debug = $appId;
+  }
+  else {
+    $debug = serialize($appId);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_modify_create_alter',
+    '%data' => $debug,
+  ]);
+}
+
+/**
+ * Implementation of hook_apic_app_modify_credentials_create_alter
+ *
+ * @param $data
+ * @param $appId
+ */
+function hook_apic_app_modify_credentials_create_alter(&$data, $appId) {
+  // make sure only log strings
+  if (is_string($appId)) {
+    $debug = $appId;
+  }
+  else {
+    $debug = serialize($appId);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_modify_credentials_create_alter',
+    '%data' => $debug,
+  ]);
+}
+
+/**
+ * Implementation of hook_apic_app_clientid_reset
+ *
+ * @param $node
+ * @param $data
+ * @param $appId
+ * @param $credId
+ */
+function appcreds_sync_apic_app_clientid_reset($node, $data, $appId, $credId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_clientid_reset',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager client id reset portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/creds/clientid/reset', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_clientsecret_reset
+ *
+ * @param $node
+ * @param $data
+ * @param $appId
+ * @param $credId
+ */
+function appcreds_sync_apic_app_clientsecret_reset($node, $data, $appId, $credId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_clientsecret_reset',
+    '%data' => $debug,
+  ]);
+  // could either send $data which is the result from the API Manager create application portal API call the portal made
+  // or $node which is the application node in the portal database.
+  _appcreds_sync_json_http_request('http://example.com/app/creds/clientsecret/reset', 'POST', json_encode($data));
+}
+
+/**
+ * Implementation of hook_apic_app_subscribe
+ *
+ * @param $node
+ * @param $data
+ * @param $appId
+ * @param $product_url
+ * @param $plan
+ * @param $subId
+ */
+function appcreds_sync_apic_app_subscribe($node, $data, $appId, $product_url, $plan, $subId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_subscribe',
+    '%data' => $debug,
+  ]);
+  // Place code here to do something when this hook runs
+
+}
+
+/**
+ * Implementation of hook_apic_app_unsubscribe
+ *
+ * @param $node
+ * @param $data
+ * @param $appId
+ * @param $product_url
+ * @param $plan
+ * @param $subId
+ */
+function appcreds_sync_apic_app_unsubscribe($node, $data, $appId, $product_url, $plan, $subId) {
+  // make sure only log strings
+  if (is_string($node->nid)) {
+    $debug = $node->nid;
+  }
+  else {
+    $debug = serialize($node->nid);
+  }
+  \Drupal::logger('appcreds_sync')->debug('%function hook invoked for: %data.', [
+    '%function' => 'appcreds_sync_apic_app_unsubscribe',
+    '%data' => $debug,
+  ]);
+  // Place code here to do something when this hook runs
+}
+
+/**
+ * @param $url
+ * @param string $verb
+ * @param null $data
+ *
+ * @return \stdClass
+ * @throws \Exception
+ */
+function _appcreds_sync_json_http_request($url, $verb = 'GET', $data = NULL) {
+  if (mb_strpos($url, 'https://') !== 0) {
+    \Drupal::messenger()->addError(t('Invalid URL. Aborting'));
+    return NULL;
+  }
+  // Use curl instead of drupal_http_request so that we can
+  // check the server certificates are genuine so that we
+  // do not fall foul of a man-in-the-middle attack.
+  $resource = curl_init();
+
+  $headers = ['Authorization: Basic ' . base64_encode('username' . ':' . 'password')];
+
+  curl_setopt($resource, CURLOPT_URL, $url);
+  curl_setopt($resource, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($resource, CURLOPT_RETURNTRANSFER, 1);
+
+  // Return the response header as part of the response
+  curl_setopt($resource, CURLOPT_HEADER, 1);
+
+  if ($verb !== 'GET') {
+    curl_setopt($resource, CURLOPT_CUSTOMREQUEST, $verb);
+  }
+
+  if ($verb === 'PUT' || $verb === 'POST') {
+    curl_setopt($resource, CURLOPT_POSTFIELDS, $data);
+  }
+
+  // Always set the defaults first
+  curl_setopt($resource, CURLOPT_SSL_VERIFYPEER, TRUE);
+  curl_setopt($resource, CURLOPT_SSL_VERIFYHOST, 2);
+
+  // If using invalid certificates then uncomment these 2 lines
+  // curl_setopt($resource, CURLOPT_SSL_VERIFYPEER, FALSE);
+  // curl_setopt($resource, CURLOPT_SSL_VERIFYHOST, 0);
+
+  // Tell curl to use a specific certificate
+  // curl_setopt($resource, CURLOPT_CAINFO, "<path to cert file>");
+  //
+  // If the certificate is does not contain the correct server name
+  // then tel curl to accept it anyway. The user gets a warning when
+  // they provide a certificate like this so they understand this is
+  // less secure than using a certificate with a matching server name.
+  // curl_setopt($resource, CURLOPT_SSL_VERIFYHOST, 0);
+
+  $response = curl_exec($resource);
+  $http_status = curl_getinfo($resource, CURLINFO_HTTP_CODE);
+  $error = curl_error($resource);
+
+  // Construct the result object we expect
+  $result = new stdClass();
+
+  // Assign the response headers
+  $header_size = curl_getinfo($resource, CURLINFO_HEADER_SIZE);
+  $header_txt = mb_substr($response, 0, $header_size);
+  $result->headers = [];
+
+  foreach (explode("\r\n", $header_txt) as $line) {
+    $parts = explode(': ', $line);
+    if (count($parts) === 2) {
+      $result->headers[$parts[0]] = $parts[1];
+    }
+  }
+
+  if ($error) {
+    // a return code of zero mostly likely means there has been a certificate error
+    // so make sure we surface this in the UI
+    if ($http_status === 0) {
+      throw new Exception(t('Could not communicate with server. Reason: ') . $error);
+    }
+  }
+
+  $result->data = mb_substr($response, $header_size);
+
+  $result->code = $http_status;
+
+  curl_close($resource);
+
+  return $result;
+}
