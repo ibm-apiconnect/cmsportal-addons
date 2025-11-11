@@ -1,0 +1,43 @@
+<?php
+
+use Drupal\node\NodeInterface;
+
+/**
+ * This function is called when a product is updated
+ * It is an example how to do something when a product is deprecated
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @param $data
+ */
+function deprecated_notification_product_update(NodeInterface $node, $data) {
+  if (isset($data['state']) && $data['state'] === 'deprecated') {
+    // do something such as send an email or invoke a REST API
+    // the example below is using some of the code from the mail_subscribers module to email all the consumerorg owners
+    // that are subscribed to any plan of this product
+
+    $mailService = \Drupal::service('mail_subscribers.mail_service');
+    $product_ref = $data['catalog_product']['info']['name'] . ':' . $data['catalog_product']['info']['version'];
+
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $site_config = \Drupal::config('system.site');
+    $from['name'] = $site_config->get('name');
+    $from['mail'] = $site_config->get('mail');
+    $message = [];
+    $message['subject'] = 'Product deprecated';
+    $message['message']['format'] = 'plain_text';
+    $message['message']['value'] = "Product " . $data['catalog_product']['info']['title'] . " has been deprecated.";
+    $message['priority'] = 0;
+    $message['receipt'] = TRUE;
+    $message['headers'] = '';
+    // this needs to be set to false as direct mail transfer doesnt work when not done as part of a UI flow
+    $message['direct'] = FALSE;
+    $message['carbon_copy'] = '';
+
+    // this is the target product to email the subscribers of
+    $message['product'] = $node->id();
+
+    $rc = $mailService->mailProductMembers($message, $from, $langcode);
+
+    // $rc should include the number of emails sent
+  }
+}
